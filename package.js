@@ -42,6 +42,8 @@ Package.onTest(function(api) {
     api.addFiles([
         'tests/utils.js',
         'tests/templates.html',
+
+        'tests/scope.js',
         'tests/static-templates.js',
         'tests/dynamic-templates.js'
     ], 'client');

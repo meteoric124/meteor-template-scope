@@ -50,5 +50,21 @@ describe('template-scope - static-templates', function () {
             Blaze.remove(view);
             expect(static_1_destroyed).toBe(true, 'Template.static1 not destroyed');
         });
+
+        it ('$emit calls the $on in the same template', function() {
+
+        });
     });
-})
+
+    describe('Case with two nested templates', function() {
+
+    });
+
+    describe('Case with three nested templates', function() {
+
+    });
+
+    describe('Case with firstNode=lastNode (template have a root DOM element).', function() {
+
+    });
+});
