@@ -43,10 +43,12 @@ Template.bar.onDestroyed(function() {
 ```
 
 For the template above, the **$preLink** traversal is:
+
 1. bar
 2. foo
 
 On the otherhand, the **$postLink** traversal is:
+
 1. foo
 2. bar
 
@@ -54,5 +56,6 @@ On the otherhand, the **$postLink** traversal is:
 If you want to contribute, feel free to fork and make a pull request.
 
 To run test locally:
+
 1. Add this to packages/ directory of some dummy meteor project.
 2. Execute: `VELOCITY_TEST_PACKAGES=1 meteor test-packages --driver-package velocity:html-reporter jandres:template-scope`
