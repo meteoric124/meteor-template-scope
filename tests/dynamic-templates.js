@@ -99,5 +99,8 @@ describe('template-scope - dynamic-templates', function () {
             'Template.dynamic2',
             'Template.dynamic1'
         ], 'Template.dynamic2 was traversed by $postLink wrong.');
+
+        Blaze.remove(view);
+        expect(dynamic2_destroyed).toBe(true, 'Template.static2 not destroyed');
     });
 });

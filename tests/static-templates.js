@@ -178,6 +178,9 @@ describe('template-scope - static-templates', function () {
 
             static_2_instance.children()[0].$scope.$emit('event');
             expect(static_2_$on_called).toBe(true);
+
+            Blaze.remove(view);
+            expect(static_2_destroyed).toBe(true, 'Template.static2 not destroyed');
         });
     });
 });
