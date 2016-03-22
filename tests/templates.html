@@ -8,3 +8,15 @@
     {{> static1}}
     {{> static1}}
 </template>
+
+<template name="dynamic1">
+    Hello all
+</template>
+
+<template name="dynamic2">
+    {{> static1}}
+
+    {{#if renderDynamic}}
+      {{> dynamic1}}
+    {{/if}}
+</template>

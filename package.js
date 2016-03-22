@@ -1,7 +1,7 @@
 Package.describe({
     name: "jandres:template-scope",
     summary: "Replication of the angular's $scope mechanism.",
-    version: "0.1.0-alpha2",
+    version: "0.1.0-alpha3",
     git: "https://github.com/JoeyAndres/meteor-template-scope.git"
 });
 
@@ -36,7 +36,8 @@ Package.onTest(function(api) {
         'templating',
         'jquery',
         'ecmascript',
-        'tracker'
+        'tracker',
+        'reactive-var'
     ], 'client');
 
     api.addFiles([

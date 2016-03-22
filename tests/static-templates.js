@@ -112,9 +112,9 @@ describe('template-scope - static-templates', function () {
         it ('calls $preLink then $postLink', function() {
             let preLink = false;
             let postLink = false;
-
             let preLinkCallStack = [];
             let postLinkCallStack = [];
+            
             static_2_cbs.preLink = function() {
                 let children = static_2_instance.children();
                 expect(children.length).toBe(2);
