@@ -9,6 +9,8 @@ let dynamic2_instance = null;
 let renderDynamic1 = new ReactiveVar(false);
 
 Template.dynamic2.onCreated(function() {
+    this.new_scope = true;
+
     dynamic2_instance = this;
     dynamic2_created = true;
     $(this).on('$preLink', dynamic2_cbs.preLink);
@@ -34,6 +36,8 @@ let dynamic1_cbs = {
 let dynamic1_instance = null;
 
 Template.dynamic1.onCreated(function() {
+    this.new_scope = true;
+
     dynamic1_instance = this;
     dynamic1_created = true;
     $(this).on('$preLink', dynamic1_cbs.preLink);

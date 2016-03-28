@@ -16,6 +16,10 @@ In your markup,
 In your javascript,
 ```javascript
 Template.bar.onCreated(function() {
+  this.new_scope = true; // Creates a new scope.
+  this.new_scope = false; // This or undefined uses parent's scope instead.
+  // Note: I really wanted to use this.scope, but apparently it was already used.
+
   $(this).on('$scopeCreated', function() {
     // this.$scope is now available.
   });

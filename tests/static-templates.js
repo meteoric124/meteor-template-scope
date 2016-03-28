@@ -7,7 +7,10 @@ let static_1_cbs = {
 };
 let static_1_instance = null;
 
+let share_scope = false;
 Template.static1.onCreated(function() {
+    this.new_scope = !share_scope;
+
     static_1_instance = this;
     static_1_created = true;
     $(this).on('$preLink', static_1_cbs.preLink);
@@ -30,6 +33,8 @@ let static_2_cbs = {
 let static_2_instance = null;
 
 Template.static2.onCreated(function() {
+    this.new_scope = true;
+
     static_2_instance = this;
     static_2_created = true;
     $(this).on('$preLink', static_2_cbs.preLink);
@@ -104,6 +109,7 @@ describe('template-scope - static-templates', function () {
                 preLink: _.noop,
                 postLink: _.noop
             };
+            share_scope = false;
             static_2_instance = null;
         });
 
@@ -173,6 +179,22 @@ describe('template-scope - static-templates', function () {
 
             static_2_instance.children()[0].$scope.$emit('event');
             expect(static_2_$on_called).toBe(true, 'Template.static2 failed to act on its own "event"');
+
+            Blaze.remove(view);
+            expect(static_2_destroyed).toBe(true, 'Template.static2 not destroyed');
+        });
+
+        it('Templates are shared if this.scope of child template (Template.static1) is false', function() {
+            share_scope = true;
+
+            var view = Blaze.render(Template.static2, $('body')[0]);
+
+            expect(static_2_created).toBe(true, 'Template.static2 not created');
+            Tracker.flush();
+
+            expect(static_2_rendered).toBe(true, 'Template.static2 not rendered');
+
+            expect(static_2_instance.$scope).toBe(static_1_instance.$scope);
 
             Blaze.remove(view);
             expect(static_2_destroyed).toBe(true, 'Template.static2 not destroyed');
