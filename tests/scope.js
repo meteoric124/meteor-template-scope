@@ -62,6 +62,49 @@ describe('$Scope test', function() {
         });
     });
 
+    describe('$broadcast/$on', function() {
+        it('it calls $on of the same scope', function() {
+            let called = false;
+            $rootScope.$on('event', () => called = true);
+            $rootScope.$broadcast('event');
+            expect(called).toBeTruthy();
+        });
+
+        it('t calls $on on self and all of the descendants', function() {
+            // Build a tree.
+            let $scope_1 = $rootScope.$new();
+            let $scope_2 = $rootScope.$new();
+
+            let $grand_scope_1 = $scope_1.$new();
+            let $grand_scope_2 = $scope_1.$new();
+
+            let $grand_scope_3 = $scope_2.$new();
+            let $grand_scope_4 = $scope_2.$new();
+
+            let scopes = [
+                $rootScope,
+                $scope_1,
+                $scope_2,
+                $grand_scope_1,
+                $grand_scope_2,
+                $grand_scope_3,
+                $grand_scope_4
+            ];
+            scopes.forEach(function($scope) {
+                $scope._test_called = false;
+               $scope.$on('event', function() {
+                   $scope._test_called = true;
+               });
+            });
+
+            $rootScope.$broadcast('event');
+
+            scopes.forEach(function($scope) {
+                expect($scope._test_called).toBeTruthy('$broadcast did not call all descendant scope (or self)');
+            });
+        });
+    });
+
     describe('$destroy', function() {
         /*
          * Since this is made for Meteor's blaze, where destruction is
