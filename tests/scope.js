@@ -122,6 +122,7 @@ describe('$Scope test', function() {
             $scope.$on('$destroy', () => {
                 called2 = true;
             });
+
             $scope.$destroy();
             expect(called1).toBeFalsy();
             expect(called2).toBeTruthy();

@@ -85,11 +85,9 @@ describe('template-scope - static-templates', function () {
             expect(static_1_rendered).toBe(true, 'Template.static1 not rendered');
 
             let $on_called = false;
-            static_1_instance.$scope.$on('event', function() {
-                $on_called = true;
-            });
+            static_1_instance.$scope.$on('event', () => $on_called = true);
             static_1_instance.$scope.$emit('event');
-            expect($on_called).toBeTruthy();
+            expect($on_called).toBeTruthy('Template.static2 failed to act on its own "event"');
 
             Blaze.remove(view);
             expect(static_1_destroyed).toBe(true, 'Template.static1 not destroyed');
@@ -163,9 +161,6 @@ describe('template-scope - static-templates', function () {
         });
 
         it ('$emit calls the $on in the same template', function() {
-            let preLink = false;
-            let postLink = false;
-
             var view = Blaze.render(Template.static2, $('body')[0]);
 
             expect(static_2_created).toBe(true, 'Template.static2 not created');
@@ -177,7 +172,7 @@ describe('template-scope - static-templates', function () {
             static_2_instance.$scope.$on('event', () => static_2_$on_called = true);
 
             static_2_instance.children()[0].$scope.$emit('event');
-            expect(static_2_$on_called).toBe(true);
+            expect(static_2_$on_called).toBe(true, 'Template.static2 failed to act on its own "event"');
 
             Blaze.remove(view);
             expect(static_2_destroyed).toBe(true, 'Template.static2 not destroyed');
