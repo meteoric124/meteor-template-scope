@@ -1,7 +1,7 @@
 Package.describe({
     name: "jandres:template-scope",
     summary: "Replication of the angular's $scope mechanism.",
-    version: "0.1.0-alpha6",
+    version: "0.1.0-alpha7",
     git: "https://github.com/meteoric124/meteor-template-scope.git"
 });
 
@@ -20,7 +20,7 @@ Package.onUse(function(api) {
         'lib/lib.js',
         'lib/data-polyfill.js',
         'lib/scope.js',
-        'lib/scope-polyfill.js',
+        'lib/scope-polyfill.js'
     ], 'client');
 
     api.export('$Scope');

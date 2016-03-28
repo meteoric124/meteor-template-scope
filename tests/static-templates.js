@@ -154,8 +154,8 @@ describe('template-scope - static-templates', function () {
             expect(postLinkCallStack.length).toBe(3);
             expect(postLinkCallStack.map(t => t.view.name)).toEqual([
                 'Template.static1',
-                'Template.static2',
-                'Template.static1'
+                'Template.static1',
+                'Template.static2'
             ], '$postLink traversal order is wrong.');
 
             Blaze.remove(view);

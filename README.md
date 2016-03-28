@@ -30,8 +30,7 @@ Template.bar.onRendered(function() {
 
   $(this).on('$postLink', function() {
      // Called while traversing updward from leaf template.
-     // Currently, this traversal is like DFS from leaf.
-     // A natural consequence of Blaze's destruction sequence.
+     // Like a reverse DFS. Reverse $preLink.
   });
 });
 
