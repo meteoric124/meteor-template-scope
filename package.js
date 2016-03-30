@@ -28,7 +28,7 @@ Package.onUse(function(api) {
 });
 
 Package.onTest(function(api) {
-    api.use('jandres:template-scope@0.1.0-alpha2');
+    api.use('jandres:template-scope@0.1.0-alpha11');
     api.use('sanjo:jasmine@0.20.3');
 
     api.use([
