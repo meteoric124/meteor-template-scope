@@ -1,7 +1,7 @@
 Package.describe({
     name: "jandres:template-scope",
     summary: "Replication of the angular's $scope mechanism.",
-    version: "0.1.0-alpha12",
+    version: "0.1.0-alpha14",
     git: "https://github.com/meteoric124/meteor-template-scope.git"
 });
 
@@ -9,7 +9,7 @@ Package.onUse(function(api) {
     api.versionsFrom("1.2.1");
 
     api.use([
-        "jandres:template-extension@4.0.4",
+        "jandres:template-extension@4.0.7-alpha3",
         'underscore',
         'templating',
         'jquery',
