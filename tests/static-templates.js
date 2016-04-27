@@ -1,3 +1,12 @@
+import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
+import { Blaze } from 'meteor/blaze';
+import { Tracker } from 'meteor/tracker';
+import { $ } from 'meteor/jquery';
+import { _ } from 'meteor/underscore';
+
+import { withRenderedTemplate } from './utils/test-helpers.js';
+
 let static_1_created = false;
 let static_1_rendered = false;
 let static_1_destroyed = false;
@@ -140,30 +149,28 @@ describe('template-scope - static-templates', function () {
                 postLink = true;
             };
 
-            var view = Blaze.render(Template.static2, $('body')[0]);
-            expect(static_2_created).toBe(true, 'Template.static2 not created');
-            Tracker.flush();
+            withRenderedTemplate('static2', {}, anchor_el => {
+                expect(static_2_created).toBe(true, 'Template.static2 not created');
+                Tracker.flush();
 
-            expect(static_2_rendered).toBe(true, 'Template.static2 not rendered');
+                expect(static_2_rendered).toBe(true, 'Template.static2 not rendered');
 
-            expect(preLink).toBeTruthy('Template.static2  $preLink not called.');
-            expect(preLinkCallStack.length).toBe(3);
-            expect(preLinkCallStack.map(t => t.view.name)).toEqual([
-                'Template.static2',
-                'Template.static1',
-                'Template.static1'
-            ], '$preLink traversal order is wrong.');
+                expect(preLink).toBeTruthy('Template.static2  $preLink not called.');
+                expect(preLinkCallStack.length).toBe(3);
+                expect(preLinkCallStack.map(t => t.view.name)).toEqual([
+                    'Template.static2',
+                    'Template.static1',
+                    'Template.static1'
+                ], '$preLink traversal order is wrong.');
 
-            expect(postLink).toBeTruthy('Template.static2  $postLink not called.');
-            expect(postLinkCallStack.length).toBe(3);
-            expect(postLinkCallStack.map(t => t.view.name)).toEqual([
-                'Template.static1',
-                'Template.static1',
-                'Template.static2'
-            ], '$postLink traversal order is wrong.');
-
-            Blaze.remove(view);
-            expect(static_2_destroyed).toBe(true, 'Template.static2 not destroyed');
+                expect(postLink).toBeTruthy('Template.static2  $postLink not called.');
+                expect(postLinkCallStack.length).toBe(3);
+                expect(postLinkCallStack.map(t => t.view.name)).toEqual([
+                    'Template.static1',
+                    'Template.static1',
+                    'Template.static2'
+                ], '$postLink traversal order is wrong.');
+            });
         });
 
         it ('$emit calls the $on in the same template', function() {
