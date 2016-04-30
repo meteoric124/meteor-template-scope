@@ -28,7 +28,7 @@ Package.onUse(function(api) {
 });
 
 Package.onTest(function(api) {
-    api.use('jandres:template-scope');
+    api.use('meteoric124:template-scope');
     api.use([
         'sanjo:jasmine@1.0.1',
         'velocity:html-reporter'
