@@ -5,6 +5,8 @@ import { Tracker } from 'meteor/tracker';
 import { $ } from 'meteor/jquery';
 import { _ } from 'meteor/underscore';
 
+import { $data } from './../lib/scope-polyfill';
+
 import { withRenderedTemplate } from './utils/test-helpers.js';
 
 let static_1_created = false;
@@ -104,6 +106,18 @@ describe('template-scope - static-templates', function () {
             expect($on_called).toBeTruthy('Template.static2 failed to act on its own "event"');
 
             Blaze.remove(view);
+            expect(static_1_destroyed).toBe(true, 'Template.static1 not destroyed');
+        });
+
+        it ('it destroys the entry in data-polyfill.js $scope after destroy', function() {
+            var view = Blaze.render(Template.static1, $('body')[0]);
+            Tracker.flush();
+
+            expect($data[view._templateInstance.$uid]).toBeTruthy('Template.static1 was not attached a template-scope-id attribute.');
+
+            Blaze.remove(view);
+
+            expect($data[view._templateInstance.$uid]).toBeFalsy('Template.static1 was not destroyed during Template destruction.');
             expect(static_1_destroyed).toBe(true, 'Template.static1 not destroyed');
         });
     });
