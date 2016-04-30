@@ -108,15 +108,19 @@ describe('template-scope - static-templates', function () {
             expect(static_1_destroyed).toBe(true, 'Template.static1 not destroyed');
         });
 
-        it ('it destroys the entry in data-polyfill.js $scope after destroy', function() {
+        it ('it destroys the entry in data-polyfill.js $scope after $destroy (not not Template.onDestroy).', function() {
             var view = Blaze.render(Template.static1, $('body')[0]);
             Tracker.flush();
 
             expect($data[view._templateInstance.$uid]).toBeTruthy('Template.static1 was not attached a template-scope-id attribute.');
 
-            Blaze.remove(view);
+            let $data_destroyed = false;
+            view._templateInstance.$scope.$on('$destroy', () => {
+                $data_destroyed = !$data[view._templateInstance.$uid];
+                expect($data_destroyed).toBeFalsy('Template.static1 $data entry was not destroyed during Template destruction.');
+            });
 
-            expect($data[view._templateInstance.$uid]).toBeFalsy('Template.static1 was not destroyed during Template destruction.');
+            Blaze.remove(view);
             expect(static_1_destroyed).toBe(true, 'Template.static1 not destroyed');
         });
     });
