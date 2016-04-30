@@ -4,8 +4,7 @@ import { Blaze } from 'meteor/blaze';
 import { Tracker } from 'meteor/tracker';
 import { $ } from 'meteor/jquery';
 import { _ } from 'meteor/underscore';
-
-import { $data } from './../lib/scope-polyfill';
+import { $data } from 'meteor/meteoric124:template-scope';
 
 import { withRenderedTemplate } from './utils/test-helpers.js';
 

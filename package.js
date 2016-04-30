@@ -1,7 +1,7 @@
 Package.describe({
     name: "meteoric124:template-scope",
     summary: "Replication of the angular's $scope mechanism.",
-    version: "0.1.0-beta.5",
+    version: "0.1.0-beta.6",
     git: "https://github.com/meteoric124/meteor-template-scope.git"
 });
 
@@ -19,7 +19,9 @@ Package.onUse(function(api) {
         'jquery'
     ], 'client');
 
-    // Todo: use es6 for these.
+    api.mainModule('lib/main.js', 'client');
+
+    // todo: Use es6 import.
     api.export('$Scope');
     api.export('$rootScope');
 });
