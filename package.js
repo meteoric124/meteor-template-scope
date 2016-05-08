@@ -1,7 +1,7 @@
 Package.describe({
     name: "meteoric124:template-scope",
     summary: "Replication of the angular's $scope mechanism.",
-    version: "0.1.0-beta.7",
+    version: "0.1.0-beta.8",
     git: "https://github.com/meteoric124/meteor-template-scope.git"
 });
 
